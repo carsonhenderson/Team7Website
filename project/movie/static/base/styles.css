@@ -1,0 +1,91 @@
+body {
+  background-color: whitesmoke;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+li {
+  float: left;
+}
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+
+.summary {
+  margin-right: 50%;
+}
+.review {
+  margin-right: 50%;
+  border-bottom: #111111 2px solid;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Button tutorial found at https://www.w3schools.com/css/css3_buttons.asp */
+
+.buttonadd {
+  background-color: green;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.5s;
+}
+.buttonadd:hover {
+  background-color: white;
+  border: green 2px solid;
+  color: green;
+}
+.buttonedit {
+  background-color: orange;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.5s;
+}
+.buttonedit:hover {
+  background-color: white;
+  border: orange 2px solid;
+  color: orange;
+}
+.buttondelete {
+  background-color: red;
+  border: black 2px solid;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.5s;
+}
+.buttondelete:hover {
+  background-color: white;
+  border: red 2px solid;
+  color: red;
+}
+
+.reviewp {
+  font-size: 20px;
+  margin-right: 50%;
+}
