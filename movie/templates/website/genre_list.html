@@ -1,0 +1,26 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Welcome!</div>
+            <div class="panel-body">
+                Students Movie Review - Make your opinion known.
+            </div>
+        </div>
+    </div>
+  <h2>Genre List</h2>
+  {% if genres %}
+  <div>
+        <table>
+            <tbody>
+            {% for genre in genres %}
+                <tr>
+                    <td>{{ genre.name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'website/base.html' %}
+{% load mathfilters %}
+{% block content %}
+  {% if movie %}
+  <h1>{{ movie.title }}</h1>
+  <h4>{{ movie.date }}</h4>
+      <p class="reviewp"><strong>Director:</strong> {{ movie.director }}</p>
+      <p class="reviewp"><strong>Producer:</strong> {{ movie.producer }}</p>
+      <p class="reviewp"><strong>Summary:</strong> {{ movie.summary }}</p>
+      <p class="reviewp"><strong>Genres:</strong>
+      {% for genre in movie.genre.all %}
+          {% if movie.genre.count == 1 %}
+              {{ genre.name }}
+          {% else %}
+              {{ genre.name }},
+          {% endif %}
+      {% endfor %}
+      </p>
+      {% else %}
+      <p>This movie does not exist.</p>
+    {% endif %}
+  <h2>Reviews</h2>
+    {% if countstars.stars__count >= 1 %}
+    <h4>Average Rating: {{ sumstars.stars__sum|div:countstars.stars__count|floatformat:2 }} Stars</h4>
+    {% else %}
+    <h4>Average Rating: There are no ratings yet.</h4>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'movie-review:review_new' %}"><span class="buttonadd">Add Review</span></a>
+    {% endif %}
+  <div>
+    {% for review in movie.reviews.all %}
+        {% if review.user == user %}
+            <div class="review">
+                <p class="reviewp"><strong>User: </strong>{{ review.user }}</p>
+                <p class="reviewp"><strong>Date: </strong>{{ review.created_date }}</p>
+                <p class="reviewp"><strong>Stars: </strong>{{ review.stars }}</p>
+                <p class="reviewp"><strong>Review Title: </strong>{{ review.title }}</p>
+                <p class="reviewp"><strong>Review: </strong>{{ review.content }}</p>
+                <a href="{% url 'movie-review:review_edit' pk=review.pk %}"><span class="buttonedit">Edit Review</span></a>
+                <a href="{% url 'movie-review:review_delete' pk=review.pk %}"><span class="buttondelete">Delete Review</span></a>
+            </div>
+            {% else %}
+            <div class="review">
+                <p class="reviewp"><strong>User: </strong>{{ review.user }}</p>
+                <p class="reviewp"><strong>Date: </strong>{{ review.created_date }}</p>
+                <p class="reviewp"><strong>Stars: </strong>{{ review.stars }}</p>
+                <p class="reviewp"><strong>Review Title: </strong>{{ review.title }}</p>
+                <p class="reviewp"><strong>Review: </strong>{{ review.content }}</p>
+            </div>
+        {% endif %}
+        <div>
+        {% empty %}
+            <div>
+                <p>No reviews yet.</p>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+{% endblock %}
