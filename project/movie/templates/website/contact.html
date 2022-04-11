@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+    <body>
+    <div class="formwrapper">
+    <h1>Have Questions?</h1>
+    <h2>Contact Us at bobanderson20199@gmail.com or press the button below.</h2>
+    <a href="{% url 'movie-review:contact_new' %}"><span class="buttonadd">Contact Form</span></a>
+    </div>
+    </body>
+{% endblock %}
+</html>
