@@ -1,0 +1,30 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+    <div class="list-container">
+        <div class="list-wrapper">
+            <div class="panel-heading">Welcome!
+            <div class="panel-body">
+                Students' Movie Review - Make your opinion known.
+            </div>
+        </div>
+  {% if genres %}
+  <div>
+        <table class="styled-table">
+            <tbody>
+            <thead>
+            <tr>
+                <th>Genre List</th>
+            </tr>
+            </thead>
+            {% for genre in genres %}
+                <tr>
+                    <td><a href="{% url 'movie-review:genre_detail' pk=genre.pk %}">{{ genre.name }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+      </div>
+  {% endif %}
+{% endblock %}

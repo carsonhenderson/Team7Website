@@ -1,0 +1,84 @@
+{% extends 'website/base.html' %}
+{% load mathfilters %}
+{% load static %}
+{% load index %}
+{% block content %}
+    {% if profile.private == False or user.pk == profile.user.pk %}
+    <body>
+    <div class="profilewrapper">
+    <div>
+        {% if user.is_authenticated %}
+            {% if user.pk == profile.user.pk %}
+                <div class="profileactions">
+                    <h1 style="border-bottom: 1px solid white; text-align: center;">Actions</h1>
+                    {% if profile.private == True %}
+                    <div>
+                        <a href="{% url 'movie-review:private' pk=profile.pk %}"><span class="buttondelete">Unprivate your profile</span></a><br>
+                    </div>
+                    {% else %}
+                    <div>
+                        <a href="{% url 'movie-review:private' pk=profile.pk %}"><span class="buttonadd">Private your profile</span></a><br>
+                    </div>
+                    {% endif %}
+                    <a href=""><span class="buttonedit" >Edit Profile</span></a><br>
+                    <a href=""><span class="buttondelete">Delete Profile</span></a><br>
+                </div>
+                {% endif %}
+        {% endif %}
+    <div class="casbah">
+        <div class="profileimage">
+        <div><img alt="Profile Picture" src="{{ profile.image.url }}" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover">
+            <div><h1>{{ profile.user.username }}</h1></div></div></div>
+        <h2>Biography</h2>
+        <div><p>{{ profile.bio }}</p></div>
+        <h2>Social Media</h2>
+        {% if profile.websiteurl %}
+        <div><a href="{{ profile.websiteurl }}">Website</a></div>
+        {% endif %}
+        {% if profile.facebookurl %}
+        <div><a href="{{ profile.facebookurl }}">Facebook</a></div>
+        {% endif %}
+        {% if profile.instagramurl %}
+        <div><a href="{{ profile.instagramurl }}">Instagram</a></div>
+        {% endif %}
+        {% if profile.twitterurl %}
+        <div><a href="{{ profile.twitterurl }}">Twitter</a></div>
+        {% endif %}
+        </div>
+        </div>
+        <div class="casbah">
+        {% if user.is_authenticated %}
+            {% if user.pk == profile.user.pk %}
+                {% if profile.user.reviews.all %}
+                <h1>Reviews:</h1>
+                {% for review in profile.user.reviews.all %}
+                    <div class="profilereviews">
+                    <p class="reviewp"><strong>Review Title: </strong>{{ review.title }}</p>
+                    <p class="reviewp"><strong>Review: </strong>{{ review.content }}</p>
+                        {% with stars=review.stars|slugify %}
+                            {% if stars == "5" %}
+                            <p>Stars: ⭐️️⭐️️⭐️️⭐️️⭐️️</p>
+                            {% elif stars == "4" %}
+                            <p>Stars: ⭐️️⭐️️⭐️️⭐️️</p>
+                            {% elif stars == "3" %}
+                            <p>Stars: ⭐️️⭐️️⭐️️</p>
+                            {% elif stars == "2" %}
+                            <p>Stars: ⭐️️⭐️️</p>
+                            {% elif stars == "1" %}
+                            <p>Stars: ⭐️️️</p>
+                         {% endif %}
+                     {% endwith %}
+                    <a href="{% url 'movie-review:review_edit' pk=review.pk %}"><span class="buttonedit">Edit Review</span></a>
+                    <a href="{% url 'movie-review:review_delete' pk=review.pk %}"><span class="buttondelete">Delete Review</span></a>
+                    </div>
+                {% endfor %}
+                    {% endif %}
+                {% endif %}
+        {% endif %}
+        </div>
+    </div>
+    </body>
+        {% else %}
+        <h1>This profile is locked or does not exist.</h1>
+    {% endif %}
+{% endblock %}
