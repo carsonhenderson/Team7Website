@@ -1,0 +1,133 @@
+{% extends 'website/base.html' %}
+{% load mathfilters %}
+{% load static %}
+{% load index %}
+{% block content %}
+    <body>
+    <div class="profilewrapper">
+    <div class="moviedetailwrapper">
+  {% if movie %}
+  <div class="review">
+  <h1>{{ movie.title }}</h1>
+  <h4>{{ movie.date }}</h4>
+      <p class="reviewp"><strong>Director:</strong> {{ movie.director }}</p>
+      <p class="reviewp"><strong>Producer:</strong> {{ movie.producer }}</p>
+      <p class="reviewp"><strong>Summary:</strong> {{ movie.summary }}</p>
+      <p class="reviewp"><strong>Genres:</strong>
+      {% for genre in movie.genre.all %}
+          {% if movie.genre.count == 1 %}
+              {{ genre.name }}
+          {% elif forloop.last %}
+              {{ genre.name }}
+          {% else %}
+              {{ genre.name }},
+          {% endif %}
+      {% endfor %}
+      </p>
+      <div style="width: 100%; border-bottom: #FFFFFF 2px solid; padding-top: 20px"></div>
+      </div>
+      {% if user.is_authenticated %}
+          {% if favorite %}
+            <div>
+                <a href="{% url 'movie-review:favorite' pk=movie.pk %}"><span class="buttondelete">Remove Favorite</span></a>
+            </div>
+          {% else %}
+              <div>
+                <a href="{% url 'movie-review:favorite' pk=movie.pk %}"><span class="buttonfavorite">Favorite this Movie</span></a>
+            </div>
+              {% endif %}
+      {% endif %}
+      {% else %}
+      <p>This movie does not exist.</p>
+    {% endif %}
+  <h2>Reviews</h2>
+    {% if countstars.stars__count >= 1 %}
+    <h4>Average Rating: {{ sumstars.stars__sum|div:countstars.stars__count|floatformat:2 }} Stars</h4>
+        <div style="padding-bottom: 20px">
+     {% with stars=sumstars.stars__sum|div:countstars.stars__count|floatformat:0 %}
+        {% if stars == "5" %}
+            <h2>⭐️️⭐️️⭐️️⭐️️⭐️️</h2>
+        {% elif stars == "4" %}
+            <h2>⭐️️⭐️️⭐️️⭐️️</h2>
+        {% elif stars == "3" %}
+            <h2>⭐️️⭐️️⭐️️</h2>
+        {% elif stars == "2" %}
+            <h2>⭐️️⭐️️</h2>
+        {% elif stars == "1" %}
+            <h2>⭐️️️</h2>
+         {% endif %}
+         </div>
+     {% endwith %}
+    {% else %}
+    <h4>Average Rating: There are no ratings yet.</h4>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'movie-review:review_new' %}"><span class="buttonadd">Add Review</span></a>
+    {% else %}
+        <a href={% url 'login' %}><span class="buttonadd">Sign in here to add a review</span></a>
+    {% endif %}
+    <div style="width: 50%; border-bottom: #FFFFFF 2px solid; padding-top: 20px;"></div>
+    <div class="review">
+    {% for review in movie.reviews.all %}
+        {% if review.user == user %}
+                <div class="reviewwrapper">
+                    {% if review.user.profile %}
+                    <p class="reviewuser"><strong>User: </strong><a href="{% url "movie-review:profile_detail" pk=review.user.profile.pk %}">{{ review.user }}</a></p><div class="reviewprofilepic"><img alt="Profile Picture" src="{{ review.user.profile.image.url }}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; overflow: hidden;"></div></div>
+                    {% else %}
+                        <p class="reviewp"><strong>User: </strong>{{ review.user }}</p></div>
+                    {% endif %}
+                <p class="reviewp"><strong>Date: </strong>{{ review.created_date }}</p>
+                    {% with stars=review.stars|slugify %}
+                            {% if stars == "5" %}
+                                <p class="reviewp"><strong>Stars:</strong> ⭐️️⭐️️⭐️️⭐️️⭐️️</p>
+                            {% elif stars == "4" %}
+                                <p class="reviewp"><strong>Stars:</strong> ⭐️️⭐️️⭐️️⭐️️</p>
+                            {% elif stars == "3" %}
+                            <p class="reviewp"><strong>Stars:</strong> ⭐️️⭐️️⭐️️</p>
+                            {% elif stars == "2" %}
+                            <p class="reviewp"><strong>Stars:</strong> ⭐️️⭐️️</p>
+                            {% elif stars == "1" %}
+                                <p class="reviewp"><strong>Stars:</strong> ⭐️️️</p>
+                         {% endif %}
+                     {% endwith %}
+                <p class="reviewp"><strong>Review Title: </strong>{{ review.title }}</p>
+                <p class="reviewp"><strong>Review: </strong>{{ review.content }}</p>
+                <a href="{% url 'movie-review:review_edit' pk=review.pk %}"><span class="buttonedit">Edit Review</span></a>
+                <a href="{% url 'movie-review:review_delete' pk=review.pk %}"><span class="buttondelete">Delete Review</span></a>
+                <div style="width: 100%; border-bottom: #FFFFFF 2px solid; padding-top: 20px"></div>
+            {% else %}
+            <div class="reviewwrapper">
+                {% if review.user.profile %}
+                <p class="reviewuser"><strong>User: </strong><a href="{% url "movie-review:profile_detail" pk=review.user.profile.pk%}">{{ review.user }}</a></p><div class="reviewprofilepic"><img alt="Profile Picture" src="{{ review.user.profile.image.url }}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; overflow: hidden;"></div></div>
+                {% else %}
+                    <p class="reviewp"><strong>User: </strong>{{ review.user }}</p></div>
+                {% endif %}
+                <p class="reviewp"><strong>Date: </strong>{{ review.created_date }}</p>
+                {% with stars=review.stars|slugify %}
+                        {% if stars == "5" %}
+                            <p class="reviewp"><strong>Stars:</strong> ⭐️️⭐️️⭐️️⭐️️⭐️️</p>
+                        {% elif stars == "4" %}
+                            <p class="reviewp"><strong>Stars:</strong> ⭐️️⭐️️⭐️️⭐️️</p>
+                        {% elif stars == "3" %}
+                        <p class="reviewp"><strong>Stars:</strong> ⭐️️⭐️️⭐️️</p>
+                        {% elif stars == "2" %}
+                        <p class="reviewp"><strong>Stars:</strong> ⭐️️⭐️️</p>
+                        {% elif stars == "1" %}
+                        <p class="reviewp"><strong>Stars:</strong> ⭐️️️</p>
+                     {% endif %}
+                 {% endwith %}
+            <p class="reviewp"><strong>Review Title: </strong>{{ review.title }}</p>
+            <p class="reviewp"><strong>Review: </strong>{{ review.content }}</p>
+            <div style="width: 100%; border-bottom: #FFFFFF 2px solid; padding-top: 20px"></div>
+        {% endif %}
+        <div>
+        {% empty %}
+            <div>
+                <p>No reviews yet.</p>
+            </div>
+        </div>
+        </div>
+        </body>
+    {% endfor %}
+{% endblock %}

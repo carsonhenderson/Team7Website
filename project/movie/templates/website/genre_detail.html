@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'website/base.html' %}
+{% block content %}
+{% load mathfilters %}
+{% load index %}
+{% load static %}
+    <body>
+    <div class="list-container">
+     <div class="list-wrapper">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Welcome!
+            <div class="panel-body">
+                Students' Movie Review - Make your opinion known.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h2>{{ genre.name }}</h2>
+    </div>
+    <div>
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Movie Name</th>
+                <th>Movie Director</th>
+                <th>Movie Producer</th>
+                <th>Movie Date</th>
+                <th>Amount of Reviews</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for movie in genre.movie_set.all %}
+                <tr>
+                    <td><a href="{% url 'movie-review:movie_detail' pk=movie.pk %}">{{ movie.title }}</a></td>
+                    <td>{{ movie.director }}</td>
+                    <td>{{ movie.producer }}</td>
+                    <td>{{ movie.date }}</td>
+                    <td>{{ movie.reviews.count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+    </div>
+    </body>
+{% endblock %}
