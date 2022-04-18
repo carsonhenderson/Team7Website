@@ -6,22 +6,9 @@
     <body>
     {% if user.is_authenticated %}
         <div class="home">
-            <h2 class="top-menu">Hello {{ user.username }},</h2>
-            <h1>Welcome to Student Reviews</h1>
-            <h2>Check out our featured movie below.</h2>
-            <img src="{% static "images/batman.jpg" %}" class="resize" alt="batman">
-            <h3>Batman (1989 film)</h3>
-            <h3>Summary:</h3>
-            <p>After witnessing the death of his beloved parents in front of his face,
-                billionaire Bruce Wayne <br> vows himself to protecting the good people of Gotham City against evil forces that threaten the city. <br>
-                But his vow is put to the test when he starts to wage his crime fighting crusade against the maniacal <br> Clown Prince of Crime...also known as the Joker.
-            </p>
-            <p><a href="{% url 'movie-review:movie_detail' pk=1 %}">Click here to see reviews for the movie</a></p>
-        </div>
-    {% else %}
-        <div class="home">
+        <h2 class="top-menu">Hello {{ user.username }},</h2>
         <h1>Welcome to Student Reviews</h1>
-        <h2>Check out our featured movie below.</h2>
+        <h2>Check out our featured movies below.</h2>
         <img src="{% static "images/batman.jpg" %}" class="resize" alt="batman">
         <h3>Batman (1989 film)</h3>
         <h3>Summary:</h3>
@@ -29,7 +16,96 @@
             billionaire Bruce Wayne <br> vows himself to protecting the good people of Gotham City against evil forces that threaten the city. <br>
             But his vow is put to the test when he starts to wage his crime fighting crusade against the maniacal <br> Clown Prince of Crime...also known as the Joker.
             </p>
-            <p><a href="{% url 'movie-review:movie_detail' pk=1 %}">Click here to see reviews for the movie</a></p>
+            <iframe width="700" height="500" src="https://www.youtube.com/embed/dgC9Q0uhX70" title="YouTube video player"
+                    frameborder="100" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            <p><a href="{% url 'movie-review:movie_detail' pk=1 %}">Click here to see reviews for Batman (1989)</a></p>
+        <h2>Fan Favorites</h2>
+            <p> Click on an image to see reviews</p>
+            <div class="clearfix">
+                <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=2 %}">
+                    <img src="{% static "images/lord of rings.jpg" %}" style="width:75%" alt="lord of the rings">
+                </a>
+                </div>
+                 <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=3 %}">
+                    <img src="{% static "images/zulu.jpg" %}" style="width:75%" alt="zulu">
+                </a>
+                </div>
+                <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=4 %}">
+                    <img src="{% static "images/monty.jpg" %}" style="width:75%" alt="Monty Python and the Holy Grail">
+                </a>
+                </div>
+                <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=5 %}">
+                    <img src="{% static "images/titanic.jpg" %}" style="width:75%" alt="Titanic">
+                </a>
+                </div>
+                <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=6 %}">
+                    <img src="{% static "images/starwars.jpg" %}" style="width:75%" alt="Star Wars Episode 4">
+                </a>
+                </div>
+                <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=7 %}">
+                    <img src="{% static "images/sixthsense.png" %}" style="width:75%" alt="The Sixth Sense">
+                </a>
+                </div>
+
+            </div>
+    {% else %}
+        <div class="home">
+        <h1>Welcome to Student Reviews</h1>
+        <h2>Check out our featured movies below.</h2>
+        <img src="{% static "images/batman.jpg" %}" class="resize" alt="batman">
+        <h3>Batman (1989 film)</h3>
+        <h3>Summary:</h3>
+        <p>After witnessing the death of his beloved parents in front of his face,
+            billionaire Bruce Wayne <br> vows himself to protecting the good people of Gotham City against evil forces that threaten the city. <br>
+            But his vow is put to the test when he starts to wage his crime fighting crusade against the maniacal <br> Clown Prince of Crime...also known as the Joker.
+            </p>
+            <iframe width="700" height="500" src="https://www.youtube.com/embed/dgC9Q0uhX70" title="YouTube video player"
+                    frameborder="100" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            <p><a href="{% url 'movie-review:movie_detail' pk=1 %}">Click here to see reviews for Batman (1989)</a></p>
+        <h2>Fan Favorites</h2>
+            <p> Click on an image to see reviews</p>
+            <div class="clearfix">
+                <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=2 %}">
+                    <img src="{% static "images/lord of rings.jpg" %}" style="width:75%" alt="lord of the rings">
+                </a>
+                </div>
+                 <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=3 %}">
+                    <img src="{% static "images/zulu.jpg" %}" style="width:75%" alt="zulu">
+                </a>
+                </div>
+                <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=4 %}">
+                    <img src="{% static "images/monty.jpg" %}" style="width:75%" alt="Monty Python and the Holy Grail">
+                </a>
+                </div>
+                <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=5 %}">
+                    <img src="{% static "images/titanic.jpg" %}" style="width:75%" alt="Titanic">
+                </a>
+                </div>
+                <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=6 %}">
+                    <img src="{% static "images/starwars.jpg" %}" style="width:75%" alt="Star Wars Episode 4">
+                </a>
+                </div>
+                <div class="img-container">
+                <a href="{% url 'movie-review:movie_detail' pk=7 %}">
+                    <img src="{% static "images/sixthsense.png" %}" style="width:75%" alt="The Sixth Sense">
+                </a>
+                </div>
+
+            </div>
+        </div>
         </div>
     {% endif %}
     </body>

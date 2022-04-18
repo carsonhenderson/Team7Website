@@ -341,3 +341,18 @@ h4{
   padding-top: 20px;
   font-family: sans-serif;
 }
+
+
+.img-container {
+  box-sizing: border-box;
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+}
+
+.clearfix::after {
+  box-sizing: border-box;
+  content: "";
+  clear: both;
+  display: table;
+}

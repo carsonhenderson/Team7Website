@@ -85,11 +85,18 @@ def profile_detail(request, pk):
 
 ## Guide to restrict found at https://stackoverflow.com/questions/62023710/django-how-to-restrict-a-user-to-put-review-only-once
 
+
 @login_required
 def review_new(request):
+    user = request.user
+    movie = get_object_or_404(Movie)
+    user_review = Review.objects.filter(movie = movie, user = user)
     if request.method == "POST":
         form = ReviewForm(request.POST)
-        if form.is_valid():
+        if user_review:
+            messages.error(request, 'You have already reviewed this movie!')
+
+        elif form.is_valid():
             review = form.save(commit=False)
             review.user = request.user
             review.save()
@@ -100,8 +107,6 @@ def review_new(request):
     else:
         form = ReviewForm()
     return render(request, 'website/review_new.html', {'form': form})
-
-
 
 @login_required
 def review_edit(request, pk):
