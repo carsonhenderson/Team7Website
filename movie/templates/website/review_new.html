@@ -11,17 +11,11 @@
     <form method="POST" class="profile-form">{% csrf_token %}
          {{ form|crispy }}
         <div class="formcontent">
-        <button type="submit" class="buttonadd" >Save</button>
+        <button type="submit" class="buttonadd">Save</button>
         </div>
     </form>
     </div>
     </div>
-    {% if messages %}
-        {% for message in messages %}
-            {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
-        {% endfor %}
-
-    {% endif %}
     </body>
 {% endblock %}
 </html>
