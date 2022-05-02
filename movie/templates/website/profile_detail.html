@@ -20,8 +20,8 @@
                         <a href="{% url 'movie-review:private' pk=profile.pk %}"><span class="buttonadd">Private your profile</span></a><br>
                     </div>
                     {% endif %}
-                    <a href=""><span class="buttonedit" >Edit Profile</span></a><br>
-                    <a href=""><span class="buttondelete">Delete Profile</span></a><br>
+                    <a href="{% url 'movie-review:profile_edit' pk=profile.pk %}"><span class="buttonedit">Edit Profile</span></a><br>
+                    <a href="{% url 'movie-review:profile_delete' pk=profile.pk %}"><span class="buttondelete">Delete Profile</span></a><br>
                 </div>
                 {% endif %}
         {% endif %}

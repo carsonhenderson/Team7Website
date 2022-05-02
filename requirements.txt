@@ -2,3 +2,5 @@ Django==4.0.3
 django-crispy-forms==1.14.0
 django-mathfilters==1.0.0  
 Pillow==9.0.1
+django-profanity-filter==0.2.1
+

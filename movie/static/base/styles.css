@@ -356,3 +356,12 @@ h4{
   clear: both;
   display: table;
 }
+.SearchBar {
+     top: 355px;
+     left: 575px;
+}
+
+.SearchBar input {
+     height: 30px;
+     width: 90px;
+}

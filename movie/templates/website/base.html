@@ -46,6 +46,13 @@
             <li>
                 <a href="{% url 'movie-review:contact' %}">Contact Us</a>
             </li>
+            <li>
+                <div class="SearchBar">
+                    <form action="{% url 'movie-review:search_results' %}" method="get">
+                    <input name="q" type="text" placeholder="Search Movies" style="padding: 3px; margin-left: 10px">
+                    </form>
+                </div>
+            </li>
         </ul>
     </div>
 </div>

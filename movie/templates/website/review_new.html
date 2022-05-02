@@ -11,7 +11,11 @@
     <form method="POST" class="profile-form">{% csrf_token %}
          {{ form|crispy }}
         <div class="formcontent">
+            {% if user.pk in movie.reviews.users %}
+        <button type="submit" class="buttonadd" onclick="alert('You have already submitted a review for this movie.')">Save</button>
+            {% else %}
         <button type="submit" class="buttonadd">Save</button>
+            {% endif %}
         </div>
     </form>
     </div>

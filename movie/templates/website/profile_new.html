@@ -8,7 +8,7 @@
     <div class="formwrapper">
     <h1>Create Your Profile</h1>
     <div class="formcontent">
-    <form method="POST" class="review-form">{% csrf_token %}
+    <form method="POST" class="review-form" enctype="multipart/form-data">{% csrf_token %}
          {{ form|crispy }}
         <div class="formcontent">
         <button type="submit" class="buttonadd">Save</button>

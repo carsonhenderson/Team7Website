@@ -63,7 +63,7 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-        <a href="{% url 'movie-review:review_new' %}"><span class="buttonadd">Add Review</span></a>
+        <a href="{% url 'movie-review:review_new' pk=movie.pk %}"><span class="buttonadd">Add Review</span></a>
     {% else %}
         <a href={% url 'login' %}><span class="buttonadd">Sign in here to add a review</span></a>
     {% endif %}

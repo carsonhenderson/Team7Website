@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+    <body>
+    <div class="list-container">
+     <div class="list-wrapper">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Welcome!
+            <div class="panel-body">
+                Students' Movie Review - Make your opinion known.
+            </div>
+        </div>
+    </div>
+    <h1>Search Results</h1>
+            <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Movie Name</th>
+                <th>Movie Director</th>
+                <th>Movie Producer</th>
+                <th>Movie Date</th>
+                <th>Amount of Reviews</th>
+            </tr>
+            </thead>
+            <tbody>
+  {% for movie in object_list %}
+      <tr>
+        <td><a href="{% url 'movie-review:movie_detail' pk=movie.pk %}">{{ movie.title }}</a>
+        <td>{{ movie.director }}</td>
+        <td>{{ movie.producer }}</td>
+        <td>{{ movie.date }}</td>
+        <td>{{ movie.reviews.count }}</td>
+  {% empty %}
+      <h2> No Movies were found</h2>
+  {% endfor %}
+
+        </tr>
+
+            </tbody>
+        </table>
+    </div>
+     </div>
+    </div>
+    </body>
+{% endblock %}
+</html>
